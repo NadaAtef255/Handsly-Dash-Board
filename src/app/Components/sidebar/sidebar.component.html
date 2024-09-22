@@ -1,0 +1,313 @@
+<!-- Sidebar & Icon  -->
+<div class="flex h-screen bg-gray-100">
+  <aside class="w-56 bg-gray-900 text-white flex flex-col">
+    <!-- sidebar -->
+    <nav class="mt-5 flex-1 px-2 space-y-1">
+      <!-- Dropdown button -->
+
+      <button
+        id="dropdownDefaultButton"
+        (click)="toggleDropdownSide()"
+        class="group flex items-center px-2 py-2 text-sm font-medium rounded-md hover:bg-gray-800"
+        type="button"
+      >
+        <span class="flex"
+          ><a
+            href="#"
+            class="group flex items-center px-2 py-1 text-base font-medium rounded-md hover:bg-gray-800"
+          >
+            <svg
+              class="mr-3 h-6 w-6 text-indigo-300"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 9h3m-3 3h3m-3 3h3m-6 1c-.306-.613-.933-1-1.618-1H7.618c-.685 0-1.312.387-1.618 1M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm7 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"
+              />
+            </svg>
+
+            <!-- <svg
+              class="mr-3 h-5 w-5 text-indigo-300"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              ></path>
+            </svg> -->
+            Engineers
+          </a></span
+        >
+
+        <svg
+          class="w-3 h-3 ms-3"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 10 6"
+        >
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="m1 1 4 4 4-4"
+          />
+        </svg>
+      </button>
+      <!-- Dropdown menu -->
+      <div
+        id="dropdown"
+        *ngIf="isDropdownOpenSide"
+        class="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+      >
+        <ul
+          class="py-2 text-sm text-gray-700 dark:text-gray-200"
+          aria-labelledby="dropdownDefaultButton"
+        >
+          <li>
+            <a
+              href="#"
+              class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+              >Get All Engineers</a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+              >Get Engineer By ID</a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+              >Earnings</a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+              >Sign out</a
+            >
+          </li>
+        </ul>
+      </div>
+      <!-- accordion -->
+      <div id="accordion-flush">
+        <!-- Section 1 -->
+        <h2 id="accordion-flush-heading-1">
+          <button
+            (click)="toggleAccordion(1)"
+            type="button"
+            class="flex items-center justify-between w-full py-5 px-3 font-medium border-b border-gray-200"
+          >
+            <span class="flex">
+              <svg
+                class="mr-3 h-6 w-6 text-indigo-300"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-width="2"
+                  d="M4.5 17H4a1 1 0 0 1-1-1 3 3 0 0 1 3-3h1m0-3.05A2.5 2.5 0 1 1 9 5.5M19.5 17h.5a1 1 0 0 0 1-1 3 3 0 0 0-3-3h-1m0-3.05a2.5 2.5 0 1 0-2-4.45m.5 13.5h-7a1 1 0 0 1-1-1 3 3 0 0 1 3-3h3a3 3 0 0 1 3 3 1 1 0 0 1-1 1Zm-1-9.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Z"
+                />
+              </svg>
+              Users
+            </span>
+            <svg
+              [ngClass]="{ 'rotate-180': isAccordionOpen === 1 }"
+              class="w-3 h-3 shrink-0"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 10 6"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5 5 1 1 5"
+              />
+            </svg>
+          </button>
+        </h2>
+        <div
+          *ngIf="isAccordionOpen === 1"
+          id="accordion-flush-body-1"
+          class="py-2 border-b border-gray-200 dark:border-gray-700"
+        >
+          <p class="px-7 py-3 rounded-md hover:bg-gray-800">
+            <a
+              href="/docs/getting-started/introduction/"
+              class="text-gray-300 hover:underline"
+              >Get All Users</a
+            >
+          </p>
+          <p class="px-7 py-3 rounded-md hover:bg-gray-800">
+            <a
+              href="/docs/getting-started/introduction/"
+              class="text-gray-300 hover:underline"
+              >Get Users By ID</a
+            >
+          </p>
+        </div>
+
+        <!-- Section 2 -->
+        <h2 id="accordion-flush-heading-2">
+          <button
+            (click)="toggleAccordion(2)"
+            type="button"
+            class="flex items-center justify-between w-full py-5 px-3 font-medium border-b border-gray-200"
+          >
+            <span class="flex">
+              <svg
+                class="mr-3 h-6 w-6 text-indigo-300"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 9h3m-3 3h3m-3 3h3m-6 1c-.306-.613-.933-1-1.618-1H7.618c-.685 0-1.312.387-1.618 1M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm7 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"
+                />
+              </svg>
+              Engineers
+            </span>
+            <svg
+              [ngClass]="{ 'rotate-180': isAccordionOpen === 2 }"
+              class="w-3 h-3 shrink-0"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 10 6"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5 5 1 1 5"
+              />
+            </svg>
+          </button>
+        </h2>
+        <div
+          *ngIf="isAccordionOpen === 2"
+          id="accordion-flush-body-2"
+          class="py-2 border-b border-gray-200 dark:border-gray-700"
+        >
+          <p class="px-7 py-3 rounded-md hover:bg-gray-800">
+            <a
+              href="/docs/getting-started/introduction/"
+              class="text-gray-300 hover:underline"
+              >Get All Engineers</a
+            >
+          </p>
+          <p class="px-7 py-3 rounded-md hover:bg-gray-800">
+            <a
+              href="/docs/getting-started/introduction/"
+              class="text-gray-300 hover:underline"
+              >Get Engineers By ID</a
+            >
+          </p>
+        </div>
+
+        <!-- Section 3 -->
+        <h2 id="accordion-flush-heading-3">
+          <button
+            (click)="toggleAccordion(3)"
+            type="button"
+            class="flex items-center justify-between w-full py-5 px-3 font-medium border-b border-gray-200"
+          >
+            <span class="flex">
+              <svg
+                class="mr-3 h-6 w-6 text-indigo-300"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13.6 16.733c.234.269.548.456.895.534a1.4 1.4 0 0 0 1.75-.762c.172-.615-.446-1.287-1.242-1.481-.796-.194-1.41-.861-1.241-1.481a1.4 1.4 0 0 1 1.75-.762c.343.077.654.26.888.524m-1.358 4.017v.617m0-5.939v.725M4 15v4m3-6v6M6 8.5 10.5 5 14 7.5 18 4m0 0h-3.5M18 4v3m2 8a5 5 0 1 1-10 0 5 5 0 0 1 10 0Z"
+                />
+              </svg>
+              Proposals
+            </span>
+            <svg
+              [ngClass]="{ 'rotate-180': isAccordionOpen === 3 }"
+              class="w-3 h-3 shrink-0"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 10 6"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5 5 1 1 5"
+              />
+            </svg>
+          </button>
+        </h2>
+        <div
+          *ngIf="isAccordionOpen === 3"
+          id="accordion-flush-body-3"
+          class="py-2 border-b border-gray-200 dark:border-gray-700"
+        >
+          <p class="px-7 py-3 rounded-md hover:bg-gray-800">
+            <a
+              href="/docs/getting-started/introduction/"
+              class="text-gray-300 hover:underline"
+              >Get All Proposals</a
+            >
+          </p>
+          <p class="px-7 py-3 rounded-md hover:bg-gray-800">
+            <a
+              href="/docs/getting-started/introduction/"
+              class="text-gray-300 hover:underline"
+              >Get Proposals By ID</a
+            >
+          </p>
+        </div>
+      </div>
+    </nav>
+  </aside>
+</div>

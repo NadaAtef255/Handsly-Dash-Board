@@ -1,0 +1,21 @@
+<div class="container my-4 engineers-container" *ngIf="engineers && engineers.length">
+  <div class="row">
+    <div class="col-md-4 mb-4" *ngFor="let engineer of engineers">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">{{ engineer.education?.title }}</h5>
+          <p class="card-text"><strong>Portfolio:</strong> <a href="{{ engineer.portfolio }}" target="_blank">{{ engineer.portfolio }}</a></p>
+          <p class="card-text"><strong>Certifications:</strong> {{ engineer.certifications?.join(', ') }}</p>
+          <p class="card-text"><strong>Education:</strong> {{ engineer.education?.title }} ({{ engineer.education?.startDate  }} - {{ engineer.education?.endDate | date }})</p>
+          <p class="card-text"><strong>Specialization:</strong> {{ engineer.specialization?.join(', ') }}</p>
+          <p class="card-text"><strong>Skills:</strong> {{ engineer.skills?.join(', ') }}</p>
+          <p class="card-text"><strong>Verified:</strong> <span class="badge" [ngClass]="{'badge-success': engineer.verifiedStatus, 'badge-danger': !engineer.verifiedStatus}">{{ engineer.verifiedStatus ? 'Yes' : 'No' }}</span></p>
+        </div>
+        <div class="card-footer text-center">
+          <a class="btn btn-primary w-100">View Profile</a>
+          <!-- <a [routerLink]="['/engineers', engineer._id]" class="btn btn-primary w-100">View Profile</a> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

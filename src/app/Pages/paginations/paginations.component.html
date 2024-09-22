@@ -1,0 +1,24 @@
+<div class="container my-4 engineers-container" *ngIf="clients && clients.length">
+  <div class="row">
+    <div class="col-md-4 mb-4" *ngFor="let client of clients">
+      <div class="card h-100 shadow-lg rounded">
+        <div class="card-body">
+          <h5 class="card-title text-center">{{ client.companyName }}</h5>
+          <p class="card-text text-center">
+            <strong>Verified:</strong>
+            <span class="badge" 
+                  [ngClass]="{'badge-success': client.verifiedStatus === 'true', 'badge-danger': client.verifiedStatus === 'false'}">
+              {{ client.verifiedStatus === 'true' ? 'Yes' : 'No' }}
+            </span>
+          </p>
+          <p class="card-text text-center"><strong>Review Date:</strong> {{ client.reviewDate | date }}</p>
+        </div>
+        <div class="card-footer text-center">
+          <a class="btn btn-primary w-100">View Details</a>
+          <!-- Uncomment the line below to enable navigation to a specific client's profile -->
+          <!-- <a [routerLink]="['/clients', client.clientId]" class="btn btn-primary w-100">View Profile</a> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

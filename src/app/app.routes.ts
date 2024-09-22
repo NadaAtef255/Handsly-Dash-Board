@@ -1,10 +1,27 @@
+// import { RouterModule, Routes } from '@angular/router';
+// import { DashboardComponent } from './dashboard/dashboard.component';
+// import { PageNotFoundComponent } from './Pages/page-not-found/page-not-found.component';
+// import { EngineersListComponent } from './Pages/Engineers_list/list-groups.component';
+// import { EngineerProfileComponent } from './Pages/Engineer-profile/engineer-profile.component';
+
+// export const routes: Routes = [
+//   // { path: 'dashboard', component: DashboardComponent },
+
+//   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+//   { path: 'engineerlist', component: EngineersListComponent },
+//   { path: 'engineer/:id', component: EngineerProfileComponent },
+//   { path: '**', component: PageNotFoundComponent },
+// ];
+
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+
+import { PageNotFoundComponent } from './Pages/page-not-found/page-not-found.component';
+import { EngineersListComponent } from './Pages/Engineers_list/list-groups.component';
+import { EngineerProfileComponent } from './Pages/Engineer-profile/engineer-profile.component';
 
 export const routes: Routes = [
-  { path: 'dashboard', component: DashboardComponent },
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-  // { path: 'engineer/:id', component: EngineerDetailsComponent },
+  { path: '', component: EngineersListComponent },
+  { path: 'engineer/:id', component: EngineerProfileComponent },
   { path: '**', component: PageNotFoundComponent },
 ];

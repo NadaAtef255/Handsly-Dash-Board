@@ -1,0 +1,9 @@
+<div *ngIf="engineer">
+  <h2>{{ engineer.education?.title }}</h2>
+  <p><strong>Portfolio:</strong> <a href="{{ engineer.portfolio }}" target="_blank">{{ engineer.portfolio }}</a></p>
+  <p><strong>Certifications:</strong> {{ engineer.certifications?.join(', ') }}</p>
+  <p><strong>Education:</strong> {{ engineer.education?.title }} ({{ engineer.education?.startDate}} - {{ engineer.education?.endDate}})</p>
+  <p><strong>Specialization:</strong> {{ engineer.specialization?.join(', ') }}</p>
+  <p><strong>Skills:</strong> {{ engineer.skills?.join(', ') }}</p>
+  <p><strong>Verified:</strong> {{ engineer.verifiedStatus ? 'Yes' : 'No' }}</p>
+</div>
