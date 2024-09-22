@@ -1,48 +1,17 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
-
-export interface Engineer {
-  _id: string;
-  education: {
-    title: string;
-    startDate: string;
-    endDate: string;
-  };
-  verifiedStatus: string;
-  user: {
-    _id: string;
-    fullName: string;
-    email: string;
-    role: string;
-  };
-  title: string;
-  overview: string;
-  skills: string[];
-  profilePic: string;
-}
-
-interface ApiResponse {
-  status: string;
-  results: number;
-  data: {
-    engineers: Engineer[];
-  };
-}
 
 @Injectable({
   providedIn: 'root',
 })
 export class EngineerService {
-  private apiUrl = 'http://localhost:8000/api/v1/engineer/all';
+  private readonly _HttpClient = inject(HttpClient);
 
-  constructor(private http: HttpClient) {}
-
-  getEngineers(): Observable<Engineer[]> {
-    return this.http.get<ApiResponse>(this.apiUrl).pipe(
-      tap((response) => console.log('API Response:', response)),
-      map((response: ApiResponse) => response.data.engineers)
-    );
+  getEngineers(): Observable<any> {
+    return this._HttpClient.get('http://localhost:8000/api/v1/engineer/all');
+  }
+  gerEngineerById(id: String): Observable<any> {
+    return this._HttpClient.get(`http://localhost:8000/api/v1/engineer/${id}`);
   }
 }
