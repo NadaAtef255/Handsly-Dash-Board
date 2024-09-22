@@ -1,10 +1,13 @@
 <div class="layout w-full">
-    <div class="navbar fixed w-full bg-red-600">sssssssssssssssssssssssss</div>
+    <div class="navbar fixed z-20 w-full bg-red-600">
+        <app-navbar></app-navbar>
+
+    </div>
     <div class="side-content relative flex w-full">
-        <div class="sidebar fixed w-1/4 h-full bg-fuchsia-400 ">
-            sssssssssaffafaf
+        <div class="sidebar fixed w-1/6 mt-11 bg-fuchsia-400 ">
+            <app-sidebar></app-sidebar>
         </div>
-        <div class="content w-3/4 bg-green-300">
+        <div class="content  w-full bg-green-300">
             <router-outlet />
         </div>
 
