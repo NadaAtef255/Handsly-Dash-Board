@@ -23,6 +23,8 @@ import { TestComponent } from './test/test.component';
 import { EngineersListComponent } from './Pages/engineer-list/engineer-list.component';
 import { Test2Component } from './test2/test2.component';
 import { EngineerProfileComponent } from './Pages/engineer-profile/engineer-profile.component';
+import { ClientListComponent } from './Pages/client-list/client-list.component';
+import { ServiceListComponent } from './Pages/services/services.component';
 
 export const routes: Routes = [
   {
@@ -32,6 +34,11 @@ export const routes: Routes = [
     children: [
       { path: '', component: EngineersListComponent },
       { path: 'profile/:id', component: EngineerProfileComponent },
+      { path: 'client', component: ClientListComponent},
+      { path: 'service', component: ServiceListComponent},
+
+
+
     ],
   },
   // { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
