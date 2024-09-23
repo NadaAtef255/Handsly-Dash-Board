@@ -20,15 +20,16 @@ import { LayoutComponent } from './Pages/layout/layout.component';
 // import { EngineersListComponent } from './Pages/Engineers_list/list-groups.component';
 // import { EngineerProfileComponent } from './Pages/Engineer-profile/engineer-profile.component';
 import { TestComponent } from './test/test.component';
-import { EngineersListComponent } from './engineer-list/engineer-list.component';
 import { Test2Component } from './test2/test2.component';
+import { SignInComponent } from './Components/sign-in/sign-in.component';
 
 export const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
     title: 'layout',
-    children: [{ path: '', component: Test2Component }],
+    children: [{ path: '', component: SignInComponent }
+    ],
   },
   // { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   // { path: 'engineer/:id', component: EngineerDetailsComponent },
