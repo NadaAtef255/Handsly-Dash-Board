@@ -25,7 +25,7 @@ export class AuthService {
 
   login(credentials: { email: string; password: string }): Observable<any> {
     this.loginStatus.next(true);
-    return this.http.post(`${this.apiUrl}/signin`,credentials)
+    return this.http.post(`${this.apiUrl}/adminlogin`,credentials)
   }
 
   // logout(): void {

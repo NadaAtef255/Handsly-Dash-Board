@@ -19,16 +19,20 @@ import { PageNotFoundComponent } from './Pages/page-not-found/page-not-found.com
 import { LayoutComponent } from './Pages/layout/layout.component';
 // import { EngineersListComponent } from './Pages/Engineers_list/list-groups.component';
 // import { EngineerProfileComponent } from './Pages/Engineer-profile/engineer-profile.component';
-import { TestComponent } from './test/test.component';
-import { Test2Component } from './test2/test2.component';
+
+import { EngineerProfileComponent } from './Pages/engineer-profile/engineer-profile.component';
 import { SignInComponent } from './Components/sign-in/sign-in.component';
+import { EngineersListComponent } from './Pages/engineer-list/engineer-list.component';
 
 export const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
     title: 'layout',
-    children: [{ path: '', component: SignInComponent }
+    children: [
+      { path: '', component: EngineersListComponent },
+      { path: 'signin', component: SignInComponent },
+      { path: 'profile/:id', component: EngineerProfileComponent },
     ],
   },
   // { path: '', redirectTo: '/dashboard', pathMatch: 'full' },

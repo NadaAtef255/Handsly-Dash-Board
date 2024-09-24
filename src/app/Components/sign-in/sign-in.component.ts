@@ -23,16 +23,16 @@ export class SignInComponent implements OnInit {
 
   onLogin() {
     console.log('done');
-    console.log(this.signinData);
+    // console.log(this.signinData);
     this._authServ.login(this.signinData).subscribe(
       (response) => {
         console.log(response);
         localStorage.setItem('token', JSON.stringify(response.token));
-        this.router.navigate(['home']);
+        this.router.navigate(['']);
       },
       (error) => {
         console.log(error);
-        this.errorMsg = error.error.message;
+        this.errorMsg = error.error.message || 'Unauthorized access. Please check your credentials.';
       }
     );
   }

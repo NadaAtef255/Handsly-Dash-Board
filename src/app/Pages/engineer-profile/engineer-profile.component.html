@@ -1,0 +1,38 @@
+<div class="profile w-5/6 ms-auto flex justify-center items-center h-screen">
+    <!-- <div class="profile-card bg-gray-200 shadow-md w-2/5 h-3/5 rounded-lg p-4">
+        <img class="engineer-profile-pic w-full rounded-md content-center "
+            src="https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg"
+            alt="Engineer Profile Picture">
+        <p>Engineer Name : <span>{{engineer.user!.fullName}}</span></p>
+        <p>engineer email <span>email</span></p>
+        <p>Submited Proposals <span>count</span>
+        </p>
+    </div> -->
+    <div class="max-w-sm rounded overflow-hidden shadow-lg">
+        <div class="relative">
+            <img class="w-full clippy"
+                src="https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg"
+                alt="Sunset in the mountains">
+            <div
+                class="clippy absolute bottom-0 left-0 top-0 right-0 bg-blue-700 bg-opacity-50 p-4 text-white flex flex-col justify-end items-center">
+            </div>
+
+        </div>
+        <div class="pt-3 pb-5 px-5 flex flex-col items-center">
+            <p class="font-bold text-3xl">{{engineer.user.fullName}}</p>
+            <p class="text-gray-500 mb-2">{{engineer.overview}}</p>
+            <p class="text-center mb-2">{{engineer.user.email}}</p>
+
+            <div class="mt-5 flex flex-row justify-center items-start">
+
+
+                <div class="px-3 text-center">
+                    <p class="text-gray-500">Submited Proposals</p>
+                    <b class="text-2xl">{{engineer.submittedProposals.length}}</b>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
