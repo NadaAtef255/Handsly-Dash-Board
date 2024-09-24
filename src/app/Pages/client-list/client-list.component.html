@@ -1,0 +1,25 @@
+<!-- src/app/components/client-list/client-list.component.html -->
+<div class="cards w-5/6 w ms-auto mt-24 p-6">
+  <p class="pb-12 text-xl font-semibold">Client List</p>
+  <div class="clients flex gap-2">
+    <div *ngFor="let client of clients" class="relative flex w-80 flex-col rounded-xl bg-gray-50 text-gray-700 shadow-md">
+      <div class="p-6">
+        <h5 class="mb-2 block font-sans text-lg font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
+          Client Name: <span>{{ client.user.fullName || 'N/A' }}</span>
+        </h5>
+        <h5 class="mb-2 block font-sans text-lg font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
+          Overview: <span>{{ client.overview || 'N/A' }}</span>
+        </h5>
+        <h5 class="mb-2 block font-sans text-lg font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
+          Active Contracts: <span>{{ client.activeContracts.length || 0 }}</span>
+        </h5>
+      </div>
+      <div class="p-6 pt-0">
+        <button [routerLink]="['/clients', client._id]" type="button"
+          class="select-none rounded-lg bg-blue-500 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md">
+          View Profile
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
