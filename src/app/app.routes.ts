@@ -23,6 +23,7 @@ import { LayoutComponent } from './Pages/layout/layout.component';
 import { EngineerProfileComponent } from './Pages/engineer-profile/engineer-profile.component';
 import { SignInComponent } from './Components/sign-in/sign-in.component';
 import { EngineersListComponent } from './Pages/engineer-list/engineer-list.component';
+import { VerifyRequestsComponent } from './Pages/verify-requests/verify-requests.component';
 
 export const routes: Routes = [
   {
@@ -32,6 +33,8 @@ export const routes: Routes = [
     children: [
       { path: '', component: EngineersListComponent },
       { path: 'signin', component: SignInComponent },
+      { path: 'verify', component: VerifyRequestsComponent },
+
       { path: 'profile/:id', component: EngineerProfileComponent },
     ],
   },
