@@ -22,7 +22,9 @@ export class EngineersListComponent implements OnInit {
     this._EngineerService.getEngineers().subscribe({
       next: (response) => {
         console.log(response);
+
         this.engineers = response.data.engineers;
+        console.log(this.engineers);
       },
     });
   }

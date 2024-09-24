@@ -23,6 +23,7 @@ import { TestComponent } from './test/test.component';
 import { EngineersListComponent } from './Pages/engineer-list/engineer-list.component';
 import { Test2Component } from './test2/test2.component';
 import { EngineerProfileComponent } from './Pages/engineer-profile/engineer-profile.component';
+import { VerifyRequestsComponent } from './Pages/verify-requests/verify-requests.component';
 
 export const routes: Routes = [
   {
@@ -31,6 +32,8 @@ export const routes: Routes = [
     title: 'layout',
     children: [
       { path: '', component: EngineersListComponent },
+      { path: 'verify', component: VerifyRequestsComponent },
+
       { path: 'profile/:id', component: EngineerProfileComponent },
     ],
   },
