@@ -28,16 +28,45 @@
                     </span>
                 </h5>
             </div>
-            <div class="p-6 pt-0">
+
+            <!-- <div class="p-6 pt-0">
 
                 <button [routerLink]="['profile',engineer.user._id]" data-ripple-light="true" type="button"
                     class="select-none rounded-lg bg-blue-500 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
 
-                    View Profile
-                </button>
-            </div>
+  Engineers List
+  <div class="engineers grid grid-cols-1 md:grid-cols-3 gap-4 mt-10">
+    <div *ngFor="let engineer of filteredEngineers" class="relative flex flex-col rounded-xl bg-gray-50 bg-clip-border text-gray-700 shadow-md">
+      <div
+          class="relative mx-4 -mt-6 h-40 overflow-hidden rounded-xl bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40 bg-gradient-to-r from-blue-500 to-blue-600">
+        <img class="engineer-profile-pic"
+             src="https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg"
+             alt="Engineer Profile Picture">
+      </div>
+      <div class="p-6">
+        <h5 class="mb-2 block font-sans text-lg font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
+          Engineer Name: <span>{{ engineer.user.fullName || 'N/A' }}</span>
+        </h5>
+        <h5 class="mb-2 block font-sans text-lg font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
+          Education: <span>{{ engineer.education.title || 'N/A' }}</span>
+        </h5>
+        <h5 class="mb-2 block font-sans text-lg font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
+          Skills: <span>{{ engineer.skills }}</span>
+        </h5>
+        <h5 class="mb-2 block font-sans text-lg font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
+          Verified: <span [ngClass]="engineer.verifiedStatus === 'verified' ? 'bg-green-300 p-1' : 'bg-red-300 p-1'">
+            {{ engineer.verifiedStatus === 'verified' ? 'Yes' : 'No' }}
+          </span>
+        </h5>
+      </div>
+      <div class="p-6 pt-0">
+        <button [routerLink]="['profile', engineer._id]" data-ripple-light="true" type="button"
+                class="select-none rounded-lg bg-yellow-400 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-yellow-400/20 transition-all hover:shadow-lg hover:shadow-yellow-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+          View Profile
+        </button>
+      </div>
+    </div>
+  </div> -->
         </div>
         }
     </div>
-
-</div>

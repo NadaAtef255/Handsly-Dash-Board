@@ -1,17 +1,13 @@
 <div class="layout w-full">
-    <div class="navbar fixed z-20 w-full bg-red-600">
-        <app-navbar></app-navbar>
-
+  <div class="navbar fixed z-20 w-full bg-red-600">
+    <app-navbar></app-navbar>
+  </div>
+  <div class="side-content relative flex w-full">
+    <div class="sidebar fixed w-1/6 mt-11 bg-fuchsia-400">
+      <app-sidebar></app-sidebar>
     </div>
-    <div class="side-content relative flex w-full">
-        <div class="sidebar fixed w-1/6 mt-11 bg-fuchsia-400 ">
-            <app-sidebar></app-sidebar>
-        </div>
-        <div class="content h-screen  w-full ">
-
-            <router-outlet />
-        </div>
-
+    <div class="content h-screen w-full">
+      <router-outlet />
     </div>
-
+  </div>
 </div>

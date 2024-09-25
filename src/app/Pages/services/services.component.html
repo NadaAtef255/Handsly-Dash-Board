@@ -1,24 +1,38 @@
 <div class="cards w-5/6 ms-auto mt-24 p-6">
   <p class="pb-12 text-2xl font-bold text-gray-800">Service List</p>
+
+  <!-- Search Input -->
+  <div class="mb-6">
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      (ngModelChange)="filterServices()"
+      placeholder="Search by title..."
+      class="border p-2 w-full rounded-md border-yellow-400"
+      [ngClass]="{'border-red-500': !isValid}"
+    />
+    <p *ngIf="!isValid" class="text-red-500">Only letters and spaces are allowed.</p>
+  </div>
+
   <div class="services grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-    <div *ngFor="let service of services" class="relative flex flex-col h-full w-full max-w-sm rounded-xl bg-white text-gray-700 shadow-lg">
+    <div *ngFor="let service of filteredServices" class="relative flex flex-col h-full w-full max-w-sm rounded-xl bg-white text-gray-700 shadow-lg">
       <div class="p-6 flex-grow">
-        <h5 class="mb-4 font-sans text-xl font-bold text-blue-gray-900">
-          Service Title: <span class="font-normal">{{ service.title }}</span>
+        <h5 class="mb-4 font-sans text-xl font-bold text-gray-800"> <!-- Changed text color to dark gray -->
+          Service Title: <span class="font-normal text-gray-600">{{ service.title }}</span> <!-- Changed text color to gray -->
         </h5>
-        <p class="mb-2 font-sans text-base font-semibold text-blue-gray-900">
-          Description: <span class="font-normal">{{ service.description }}</span>
+        <p class="mb-2 font-sans text-base font-semibold text-gray-800"> <!-- Changed text color to dark gray -->
+          Description: <span class="font-normal text-gray-600">{{ service.description }}</span> <!-- Changed text color to gray -->
         </p>
-        <p class="mb-2 font-sans text-base font-semibold text-blue-gray-900">
-          Budget: <span class="font-normal">{{ service.budget | currency }}</span>
+        <p class="mb-2 font-sans text-base font-semibold text-gray-800"> <!-- Changed text color to dark gray -->
+          Budget: <span class="font-normal text-gray-600">{{ service.budget | currency }}</span> <!-- Changed text color to gray -->
         </p>
-        <p class="mb-2 font-sans text-base font-semibold text-blue-gray-900">
-          Level: <span class="font-normal">{{ service.level || 'N/A' }}</span>
+        <p class="mb-2 font-sans text-base font-semibold text-gray-800"> <!-- Changed text color to dark gray -->
+          Level: <span class="font-normal text-gray-600">{{ service.level || 'N/A' }}</span> <!-- Changed text color to gray -->
         </p>
       </div>
       <div class="p-6 pt-0">
         <button [routerLink]="['/services', service._id]"
-          class="w-full rounded-lg bg-blue-500 py-3 text-center font-sans text-sm font-bold uppercase text-white shadow-md transition-all duration-300 hover:bg-blue-600">
+          class="w-full rounded-lg bg-yellow-400 py-3 text-center font-sans text-sm font-bold uppercase text-white shadow-md transition-all duration-300 hover:bg-yellow-600"> <!-- Changed button color to yellow -->
           View Details
         </button>
       </div>

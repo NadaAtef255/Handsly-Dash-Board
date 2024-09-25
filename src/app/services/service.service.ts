@@ -15,4 +15,9 @@ export class ServiceService {
   getServices(): Observable<{ data: { services: IService[] } }> {
     return this.http.get<{ data: { services: IService[] } }>(this.apiUrl);
   }
+
+  getServiceById(serviceId: string): Observable<{ data: { service: IService } }> {
+    return this.http.get<{ data: { service: IService } }>(`${this.apiUrl}/${serviceId}`);
+  }
+
 }
