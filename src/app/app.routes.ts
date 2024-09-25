@@ -38,11 +38,8 @@ export const routes: Routes = [
       { path: 'verify', component: VerifyRequestsComponent },
 
       { path: 'profile/:id', component: EngineerProfileComponent },
-      { path: 'client', component: ClientListComponent},
-      { path: 'service', component: ServiceListComponent},
-
-
-
+      { path: 'client', component: ClientListComponent },
+      { path: 'service', component: ServiceListComponent },
     ],
   },
   // { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
