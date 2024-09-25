@@ -1,6 +1,7 @@
 <div class="cards w-5/6 ms-auto mt-24 p-6">
   <p class="pb-12 text-xl font-semibold">Engineer List</p>
 
+<<<<<<< HEAD
   <!-- Search Input Field -->
   <div class="mb-6">
     <input type="text" [(ngModel)]="searchTerm" (input)="filterEngineers()"
@@ -9,6 +10,10 @@
            class="w-full p-3 border border-yellow-400 rounded-lg shadow-sm focus:outline-none focus:ring focus:border-yellow-500"
            title="Only letters and spaces are allowed"/>
   </div>
+=======
+                <button [routerLink]="['profile',engineer.user._id]" data-ripple-light="true" type="button"
+                    class="select-none rounded-lg bg-blue-500 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+>>>>>>> 94261a9681afb21815a4fa57884d66a1c8458a10
 
   <!-- Engineers List -->
   <div class="engineers grid grid-cols-1 md:grid-cols-3 gap-4 mt-10">

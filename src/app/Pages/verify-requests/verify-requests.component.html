@@ -1,0 +1,52 @@
+<div class="verify relative h-screen w-5/6 mt-16 p-6 ms-auto">
+    <!-- Form visibility depends on selectedUser -->
+    <div [class.hidden]="!selectedUser" class="view-form absolute flex justify-center inset-0 bg-black bg-opacity-25">
+        <div
+            class="form flex flex-col items-center fixed w-2/5 h-fit py-6 mt-8 rounded-lg bg-white shadow-md shadow-amber-300">
+            <div class="close absolute top-3 right-5 cursor-pointer" (click)="closeForm()">X</div>
+            <div class="profile-img flex justify-center pt-5 w-full">
+                <img class="rounded-full border-2 border-amber-400 w-40 h-40"
+                    [src]="selectedUser?.profilePic|| 'default-image-url.jpg'" alt="Profile Image">
+            </div>
+            <p class="text-lg font-medium mt-2">{{selectedUser?.fullName}}</p>
+            <p class="text-gray-600">{{selectedUser?.role}}</p>
+            <p class="px-2 text-gray-900 rounded-md bg-slate-200">{{selectedUser?.username}}</p>
+            <p class="text-amber-600">Verification Document: <span class="text-gray-600">Uploaded</span></p>
+
+            <div class="actions flex mt-3 gap-3">
+                <button (click)="verifyUser()"
+                    class="py-2 px-4 rounded-lg text-white hover:bg-green-500 bg-green-600">Verify</button>
+                <button (click)="rejectUser()"
+                    class="py-2 px-4 rounded-lg text-white hover:bg-red-500 bg-red-600">Reject</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Table -->
+    <p class="text-3xl font-semibold">Verify Requests</p>
+    <div class="shadow-lg rounded-lg overflow-hidden mt-6">
+        <table class="w-full table-fixed">
+            <thead>
+                <tr class="bg-gray-100">
+                    <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Name</th>
+                    <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Email</th>
+                    <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Role</th>
+                    <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">View</th>
+                </tr>
+            </thead>
+            <tbody class="bg-white">
+                <tr *ngFor="let user of pendingUsers">
+                    <td class="py-4 px-6 border-b border-gray-200">{{user.fullName}}</td>
+                    <td class="py-4 px-6 border-b border-gray-200">{{user.email}}</td>
+                    <td class="py-4 px-6 border-b border-gray-200">{{user.role}}</td>
+                    <td class="py-4 px-6 border-b border-gray-200">
+                        <button (click)="viewUser(user)"
+                            class="bg-green-500 hover:bg-green-400 text-white py-2 px-3 rounded-xl text-xs">
+                            View
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

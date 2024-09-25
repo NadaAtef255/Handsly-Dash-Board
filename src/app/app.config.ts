@@ -1,13 +1,11 @@
 import { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { EngineerService } from './services/engineer.service'; // Adjust the import path as necessary
 import { routes } from './app.routes';
 import { HttpClient, provideHttpClient, withFetch } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    provideHttpClient(withFetch()),
-    EngineerService,
+    provideHttpClient(withFetch())
   ],
 };

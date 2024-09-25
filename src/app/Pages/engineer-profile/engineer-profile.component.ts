@@ -19,7 +19,6 @@ export class EngineerProfileComponent implements OnInit {
   ngOnInit(): void {
     this._EngineerService
       .gerEngineerById(this._ActivatedRoute.snapshot.params['id'])
-
       .subscribe({
         next: (response) => {
           console.log('Dataaaaaa', response);

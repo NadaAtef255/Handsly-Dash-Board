@@ -1,6 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpErrorResponse } from '@angular/common/http';
 import { EngineerService } from '../../services/engineer.service';
 import { IEngineer } from '../../interfaces/iengineer';
 import { RouterLink } from '@angular/router';
@@ -25,11 +24,16 @@ export class EngineersListComponent implements OnInit {
     this._EngineerService.getEngineers().subscribe({
       next: (response) => {
         console.log(response);
+
         this.engineers = response.data.engineers;
+<<<<<<< HEAD
         this.filteredEngineers = this.engineers;
       },
       error: (err: HttpErrorResponse) => {
         console.error('Error fetching engineers:', err);
+=======
+        console.log(this.engineers);
+>>>>>>> 94261a9681afb21815a4fa57884d66a1c8458a10
       },
     });
   }
