@@ -3,28 +3,52 @@ import { CommonModule } from '@angular/common';
 import { EngineerService } from '../../services/engineer.service';
 import { IEngineer } from '../../interfaces/iengineer';
 import { RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-engineer-list',
   templateUrl: './engineer-list.component.html',
   styleUrls: ['./engineer-list.component.css'],
   standalone: true,
-  imports: [CommonModule, RouterLink], // Keep only CommonModule
+  imports: [CommonModule, RouterLink, FormsModule],
 })
 export class EngineersListComponent implements OnInit {
   private readonly _EngineerService = inject(EngineerService);
 
   engineers!: IEngineer[];
+  filteredEngineers!: IEngineer[];
+  searchTerm: string = '';
 
   ngOnInit(): void {
-    console.log('Component initialized'); // Check if this logs
+    console.log('Component initialized');
     this._EngineerService.getEngineers().subscribe({
       next: (response) => {
         console.log(response);
 
         this.engineers = response.data.engineers;
+<<<<<<< HEAD
+        this.filteredEngineers = this.engineers;
+      },
+      error: (err: HttpErrorResponse) => {
+        console.error('Error fetching engineers:', err);
+=======
         console.log(this.engineers);
+>>>>>>> 94261a9681afb21815a4fa57884d66a1c8458a10
       },
     });
+  }
+
+  filterEngineers() {
+    const term = this.searchTerm.toLowerCase();
+
+    // Check if the input consists only of letters (or spaces)
+    if (/^[a-zA-Z\s]*$/.test(term)) {
+      this.filteredEngineers = this.engineers.filter(engineer =>
+        engineer.user.fullName.toLowerCase().includes(term)
+      );
+    } else {
+      // Reset to show all engineers if input is invalid
+      this.filteredEngineers = this.engineers;
+    }
   }
 }
