@@ -1,1 +1,31 @@
-<p>proposals works!</p>
+<!-- src/app/components/proposals-list/proposals-list.component.html -->
+<div class="cards w-5/6 w ms-auto mt-24 p-6">
+  <p class="pb-12 text-xl font-semibold">Proposals List</p>
+  <div class="proposals flex gap-2">
+    <div *ngFor="let proposal of proposals" class="relative flex w-80 flex-col rounded-xl bg-gray-50 text-gray-700 shadow-md">
+      <div class="p-6">
+        <h5 class="mb-2 block font-sans text-lg font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
+          Proposal ID: <span>{{ proposal._id }}</span>
+        </h5>
+        <h5 class="mb-2 block font-sans text-lg font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
+          Engineer: <span>{{ proposal.engineer || 'N/A' }}</span>
+        </h5>
+        <h5 class="mb-2 block font-sans text-lg font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
+          Service: <span>{{ proposal.service || 'N/A' }}</span>
+        </h5>
+        <h5 class="mb-2 block font-sans text-lg font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
+          Content: <span>{{ proposal.content || 'N/A' }}</span>
+        </h5>
+        <h5 class="mb-2 block font-sans text-lg font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
+          Budget: <span>{{ proposal.budget | currency }}</span>
+        </h5>
+      </div>
+      <div class="p-6 pt-0">
+        <button [routerLink]="['/proposals', proposal._id]" type="button"
+          class="select-none rounded-lg bg-blue-500 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md">
+          View Details
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
