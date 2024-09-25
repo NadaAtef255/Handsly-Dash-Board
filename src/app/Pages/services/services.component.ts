@@ -34,20 +34,28 @@ export class ServiceListComponent implements OnInit {
     });
   }
 
-  filterServices(): void {
-    // Validate input to ensure no numbers are present
-    if (/[^a-zA-Z\s]/.test(this.searchTerm)) {
-      this.isValid = false; // Set validation flag to false
-      this.searchTerm = ''; // Reset searchTerm
-      this.filteredServices = this.services; // Reset to all services
-      return; // Exit early if input is invalid
-    } else {
-      this.isValid = true; // Set validation flag to true
-    }
-
-    // Filter services based on valid input
-    this.filteredServices = this.services.filter(service =>
-      service.title.toLowerCase().includes(this.searchTerm.toLowerCase())
-    );
+// Prevent the user from entering numbers
+preventNumbers(event: KeyboardEvent): void {
+  const regex = /[0-9]/;  // التعبير المنتظم الذي يمثل الأرقام
+  if (regex.test(event.key)) {
+    event.preventDefault();  // منع إدخال الحرف إذا كان رقمًا
   }
+}
+
+filterServices(): void {
+  const regex = /^[a-zA-Z\s]*$/;  // يسمح فقط بالحروف والمسافات
+  if (!regex.test(this.searchTerm)) {
+    this.isValid = false; // Set validation flag to false
+    this.filteredServices = this.services; // Reset to all services
+    return; // Exit early if input is invalid
+  } else {
+    this.isValid = true; // Set validation flag to true
+  }
+
+  // Filter services based on valid input
+  this.filteredServices = this.services.filter(service =>
+    service.title.toLowerCase().includes(this.searchTerm.toLowerCase())
+  );
+}
+
 }

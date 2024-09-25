@@ -34,9 +34,31 @@ export class ClientListComponent implements OnInit {
     });
   }
 
+  isValid: boolean = true;
+
+  // Prevent the user from entering numbers
+  preventNumbers(event: KeyboardEvent): void {
+    const regex = /[0-9]/;  // التعبير المنتظم الذي يمثل الأرقام
+    if (regex.test(event.key)) {
+      event.preventDefault();  // منع إدخال الحرف إذا كان رقمًا
+    }
+  }
+
   // Function to filter clients based on search term
-  filterClients() {
+  filterClients(): void {
+    const regex = /^[a-zA-Z\s]*$/;  // يسمح فقط بالحروف والمسافات
+    if (!regex.test(this.searchTerm)) {
+      this.isValid = false;  // Set validation flag to false if invalid input
+      this.filteredClients = this.clients;  // Reset to all clients
+      return;
+    } else {
+      this.isValid = true;  // Set validation flag to true if valid input
+    }
+
+    // Convert the search term to lowercase for case-insensitive comparison
     const term = this.searchTerm.toLowerCase();
+
+    // Filter the clients list based on the full name
     this.filteredClients = this.clients.filter(client =>
       client.user.fullName.toLowerCase().includes(term)
     );
