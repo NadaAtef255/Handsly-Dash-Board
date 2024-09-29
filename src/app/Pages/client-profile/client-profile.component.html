@@ -1,6 +1,78 @@
-<div class="profile-container max-w-4xl mx-auto bg-gray-100 shadow-xl rounded-lg cards w-5/6 ms-auto mt-28 p-8">
+<div class="client-profile-container max-w-4xl mx-auto bg-gray-100 shadow-xl rounded-lg w-5/6 ms-auto mt-28 p-8">
   <h2 class="text-4xl font-extrabold text-center text-yellow-500 mb-10 tracking-wide">Client Profile</h2>
 
+  <!-- Update Form Section -->
+  <div *ngIf="showUpdate"
+    class="update-client-form inset-0 absolute flex justify-center items-center bg-black bg-opacity-20">
+
+    <form [formGroup]="updateGroup" (ngSubmit)="saveClient()">
+
+      <div class="flex space-x-4">
+
+        <div class="bg-white overflow-hidden shadow rounded-lg border mx-4 box">
+          <div (click)="closeUpdate()" class="close w-full px-3 text-xl cursor-pointer flex justify-end">X
+          </div>
+          <div class="px-4 py-2 sm:px-6">
+            <div class="flex justify-between items-center">
+              <h3 class="text-lg leading-6 font-medium text-gray-900">
+                User Details
+              </h3>
+              <button class="text-sm font-medium text-green-500">
+                Update
+              </button>
+            </div>
+            <p class="mt-1 max-w-2xl text-sm text-gray-500">
+              The contact information is provided below.
+            </p>
+          </div>
+          <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
+            <dl class="sm:divide-y sm:divide-gray-200">
+              <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                  Full name
+                </dt>
+                <dd class=" text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                  <input type="text" formControlName="fullName" placeholder="Full Name"
+                    class="border border-gray-300   rounded-md text-center">
+                </dd>
+              </div>
+              <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                  Email address
+                </dt>
+                <dd class=" text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                  <input type="email" formControlName="email" placeholder="Email"
+                    class="border border-gray-300  rounded-md text-center">
+                </dd>
+              </div>
+              <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                  Overview
+                </dt>
+                <dd class=" text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                  <input type="text" formControlName="overview" placeholder="overview"
+                    class="border border-gray-300  rounded-md text-center">
+                </dd>
+              </div>
+
+              <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                  Role Type
+                </dt>
+                <dd class=" text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                  <input type="text" formControlName="role" placeholder="Role (engineer/client/admin)"
+                    class="border border-gray-300  rounded-md text-center">
+                </dd>
+              </div>
+
+            </dl>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- Client Profile Details Section -->
   <div *ngIf="clientProfile" class="p-8 bg-white rounded-xl shadow-lg">
     <div class="mb-6">
       <h3 class="text-2xl font-bold text-gray-800 mb-2">
@@ -16,11 +88,17 @@
       </p>
     </div>
 
-    <div class="mb-6">
+    <div class="mb-6 flex gap-2 items-center">
       <p class="text-lg text-gray-600 mb-1">
         <i class="fas fa-info-circle text-yellow-600"></i> Overview:
       </p>
-      <p class="text-base text-gray-700">{{ clientProfile.overview }}</p>
+      <p class="text-base text-gray-700">{{ clientProfile.overview || "No Overviews"}}</p>
+    </div>
+    <div class="mb-6 flex gap-2 items-center ">
+      <p class="text-lg text-gray-600 mb-1">
+        <i class="fas fa-info-circle text-yellow-600"></i> Role Type:
+      </p>
+      <p class="text-base text-gray-700">{{ clientProfile.user.role }}</p>
     </div>
 
     <div class="mb-6">
@@ -29,7 +107,7 @@
       </h4>
       <ul class="list-inside list-disc text-gray-700">
         <li *ngFor="let project of clientProfile.postedProjects">
-          {{ project.service }}
+          {{ project.service || "0" }}
         </li>
       </ul>
     </div>
@@ -40,12 +118,21 @@
       </h4>
       <ul class="list-inside list-disc text-gray-700">
         <li *ngFor="let contract of clientProfile.activeContracts">
-          {{ contract }}
+          {{ contract || "0" }}
         </li>
       </ul>
     </div>
   </div>
 
+  <!-- Action Buttons Section -->
+  <div class="actions flex justify-between mt-5 gap-3">
+    <button (click)="openUpdate()"
+      class="py-2 px-4 rounded-lg text-white hover:bg-green-500 bg-green-600">Update</button>
+    <button (click)="deleteClientById()"
+      class="py-2 px-4 rounded-lg text-white hover:bg-red-500 bg-red-600">Delete</button>
+  </div>
+
+  <!-- Loading State -->
   <div *ngIf="!clientProfile" class="text-center mt-12">
     <p class="text-xl text-gray-500 animate-pulse">
       <i class="fas fa-spinner fa-spin text-yellow-600"></i> Loading client details...

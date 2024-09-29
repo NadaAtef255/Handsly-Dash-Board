@@ -1,15 +1,15 @@
-<div class="cards w-5/6 ms-auto mt-24 p-6 bg-white shadow-lg rounded-lg">
+<div class="cards overflow-hidden w-5/6 ms-auto mt-24 p-6 bg-white shadow-lg rounded-lg">
   <p class="pb-12 text-2xl font-bold text-gray-800 border-b mb-6">Client List</p>
 
   <!-- Search Input Field -->
   <div class="mb-6">
-    <input type="text" [(ngModel)]="searchTerm" (input)="filterClients()"
-           placeholder="Search by Client Name"
-           class="w-full p-3 border border-yellow-500 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-300"/>
+    <input type="text" [(ngModel)]="searchTerm" (input)="filterClients()" placeholder="Search by Client Name"
+      class="w-full p-3 border border-yellow-500 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-300" />
   </div>
 
   <div class="clients grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-    <div *ngFor="let client of filteredClients" class="relative flex flex-col rounded-xl bg-gray-50 text-gray-700 shadow-md hover:shadow-lg transition-shadow duration-300">
+    <div *ngFor="let client of getPaginatedClients()"
+      class="relative flex flex-col rounded-xl bg-gray-50 text-gray-700 shadow-md hover:shadow-lg transition-shadow duration-300">
       <div class="p-6">
         <h5 class="mb-4 font-sans text-lg font-semibold leading-snug tracking-normal text-gray-900">
           Client Name: <span class="text-black-300">{{ client.user.fullName || 'N/A' }}</span>
@@ -28,5 +28,20 @@
         </button>
       </div>
     </div>
+  </div>
+
+  <!-- Pagination Controls -->
+  <div class="flex justify-evenly items-center mt-6">
+    <button (click)="changePage(currentPage - 1)" [disabled]="!hasPreviousPage()"
+      class="py-2 px-4 rounded-lg bg-yellow-400 text-white hover:bg-yellow-600">
+      Previous
+    </button>
+
+    <span class="text-gray-700">Page {{ currentPage }} of {{ totalPages }}</span>
+
+    <button (click)="changePage(currentPage + 1)" [disabled]="!hasNextPage()"
+      class="py-2 px-4 rounded-lg bg-yellow-400 text-white hover:bg-yellow-600">
+      Next
+    </button>
   </div>
 </div>

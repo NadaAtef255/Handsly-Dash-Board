@@ -1,72 +1,119 @@
-<div class="profile w-5/6 ms-auto flex justify-center items-center h-screen">
-    <!-- <div class="profile-card bg-gray-200 shadow-md w-2/5 h-3/5 rounded-lg p-4">
-        <img class="engineer-profile-pic w-full rounded-md content-center "
-            src="https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg"
-            alt="Engineer Profile Picture">
-        <p>Engineer Name : <span>{{engineer.user!.fullName}}</span></p>
-        <p>engineer email <span>email</span></p>
-        <p>Submited Proposals <span>count</span>
-        </p>
-    </div> -->
-    <div class="update-form z-[1] mt-12 absolute flex justify-center  inset-0 bg-black bg-opacity-25">
-        <div
-            class="form flex flex-col items-center fixed w-1/3 h-3/5 mt-8 rounded-lg bg-white shadow-md shadow-amber-300">
-            <div class="profile-img relative w-fit flex justify-center pt-5">
+<div
+    class="profile-container w-full mx-auto h-screen  mt-4 flex justify-center items-center bg-gray-100 shadow-xl rounded-lg ">
+    <div [ngClass]="{'hidden' : !showUpdate, 'flex': showUpdate}" class=" update-form z-[1] h-screen mt-12 absolute flex justify-center items-center inset-0 bg-black
+        bg-opacity-25">
+        <form [formGroup]="updateGroup" (ngSubmit)="saveEngineer()">
 
-                <img class="rounded-full border-2 border-amber-400 w-36 h-36"
-                    src="https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg"
-                    alt="">
-                <span class="absolute bottom-3 right-4 "><i
-                        class="fa-solid fa-pen bg-gray-200 rounded-full p-2 cursor-pointer"></i></span>
+            <div class="flex space-x-4">
 
+                <div class="bg-white overflow-hidden shadow rounded-lg border mx-4 box">
+                    <div (click)="closeUpdate()" class="close w-full px-3 text-xl cursor-pointer flex justify-end">X
+                    </div>
+                    <div class="px-4 py-2 sm:px-6">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-lg leading-6 font-medium text-gray-900">
+                                User Details
+                            </h3>
+                            <button class="text-sm font-medium text-green-500">
+                                Update
+                            </button>
+                        </div>
+                        <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                            The contact information is provided below.
+                        </p>
+                    </div>
+                    <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
+                        <dl class="sm:divide-y sm:divide-gray-200">
+                            <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt class="text-sm font-medium text-gray-500">
+                                    Full name
+                                </dt>
+                                <dd class=" text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                    <input type="text" formControlName="fullName" placeholder="Full Name"
+                                        class="border border-gray-300   rounded-md text-center">
+                                </dd>
+                            </div>
+                            <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt class="text-sm font-medium text-gray-500">
+                                    Email address
+                                </dt>
+                                <dd class=" text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                    <input type="email" formControlName="email" placeholder="Email"
+                                        class="border border-gray-300  rounded-md text-center">
+                                </dd>
+                            </div>
+                            <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt class="text-sm font-medium text-gray-500">
+                                    Overview
+                                </dt>
+                                <dd class=" text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                    <input type="text" formControlName="overview" placeholder="overview"
+                                        class="border border-gray-300  rounded-md text-center">
+                                </dd>
+                            </div>
+
+                            <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt class="text-sm font-medium text-gray-500">
+                                    Role Type
+                                </dt>
+                                <dd class=" text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                    <input type="text" formControlName="role" placeholder="Role (engineer/client/admin)"
+                                        class="border border-gray-300  rounded-md text-center">
+                                </dd>
+                            </div>
+                            <!-- <div class="actions flex mt-3 gap-3">
+                                <button type="button" (click)="closeUpdate()"
+                                    class="py-2 px-4 rounded-lg text-white bg-gray-500">Cancel</button>
+                                <button type="submit" class="py-2 px-4 rounded-lg text-white bg-green-600">Save</button>
+                            </div> -->
+                            <!-- <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt class="text-sm font-medium text-gray-500">
+                                    Company
+                                </dt>
+                                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                    BoxPower
+                                </dd>
+                            </div>
+                            <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt class="text-sm font-medium text-gray-500">
+                                    Job Title
+                                </dt>
+                                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                    Project Engineer
+                                </dd>
+                            </div>
+                            <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt class="text-sm font-medium text-gray-500">
+                                    Department
+                                </dt>
+                                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                    Civil & Electrical
+                                </dd>
+                            </div> -->
+                        </dl>
+                    </div>
+                </div>
             </div>
-            <p class="text-lg font-medium mt-2">Mohamed Tarek Abo Saif <span class=" "><i
-                        class="fa-solid fa-pen bg-gray-200 rounded-full p-2 cursor-pointer"></i></span></p>
-            <p class="text-gray-600">Engineer <span class=" "><i
-                        class="fa-solid fa-pen bg-gray-200 rounded-full p-2 cursor-pointer"></i></span></p>
-            <p>Computer Science <span class=" "><i
-                        class="fa-solid fa-pen bg-gray-200 rounded-full p-2 cursor-pointer"></i></span></p>
-            <p class="px-2 mx-4 text-gray-900 rounded-md bg-slate-200">"new engineer need to make freelance job in
-                addition
-                to my own
-                work " <span class=" "><i class="fa-solid fa-pen bg-white rounded-full p-2 cursor-pointer"></i></span>
-            </p>
-
-            <div class="actions flex mt-3 gap-3">
-                <button class="py-2 px-4 rounded-lg text-white bg-gray-500"> cancel</button>
-                <button class="py-2 px-4 rounded-lg text-white  bg-green-600"> Save</button>
-
-            </div>
-
-        </div>
-
+        </form>
     </div>
-    <div class="max-w-sm rounded overflow-hidden shadow-lg">
-        <div class="relative">
-            <img class="w-full clippy"
-                src="https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg"
-                alt="Sunset in the mountains">
-            <div
-                class="clippy absolute bottom-0 left-0 top-0 right-0 bg-blue-700 bg-opacity-50 p-4 text-white flex flex-col justify-end items-center">
-            </div>
-
+    <div class="max-w-sm w-1/3 h-3/5 bg-gray-200 mt-5 rounded  shadow-lg">
+        <div class="relative flex justify-center">
+            <img class="w-1/2 clippy" [src]="engineer.user.profilePic" alt="Sunset in the mountains">
         </div>
         <div class="pt-3 pb-5 px-5 flex flex-col items-center">
-            <p class="font-bold text-3xl">{{engineer.user.fullName}}</p>
-            <p class="text-gray-500 mb-2">{{engineer.overview}}</p>
-            <p class="text-center mb-2">{{engineer.user.email}}</p>
+            <p class="font-bold text-xl">{{ engineer.user.fullName }}</p>
+            <p class="text-gray-500 mb-2">{{ engineer.overview }}</p>
+            <p class="text-center mb-2">{{ engineer.user.email }}</p>
             <div class="actions flex gap-3">
-                <button class="py-2 px-4 rounded-lg text-white hover:bg-green-500 bg-green-600"> Update</button>
-                <button class="py-2 px-4 rounded-lg text-white hover:bg-red-500 bg-red-600"> Delete</button>
-
+                <button (click)="openUpdate()"
+                    class="py-2 px-4 rounded-lg text-white hover:bg-green-500 bg-green-600">Update</button>
+                <button (click)="deleteEngineerById()"
+                    class="py-2 px-4 rounded-lg text-white hover:bg-red-500 bg-red-600">Delete</button>
             </div>
-
             <div class="mt-5 flex flex-row justify-center items-start">
-
-
                 <div class="px-3 text-center">
-                    <p class="text-gray-500">Submited Proposals</p>
-                    <b class="text-2xl">{{engineer.submittedProposals.length}}</b>
+                    <p class="text-gray-500">Submitted Proposals</p>
+                    <b class="text-2xl">{{ engineer.submittedProposals.length }}</b>
                 </div>
             </div>
         </div>

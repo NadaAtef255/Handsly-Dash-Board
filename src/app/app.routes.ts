@@ -16,13 +16,14 @@ import { ClientProfileComponent } from './Pages/client-profile/client-profile.co
 import { ServiceDetailsComponent } from './Pages/service-details/service-details.component';
 
 export const routes: Routes = [
+  { path: '', component: SignInComponent },
+
   {
     path: '',
     component: LayoutComponent,
     title: 'layout',
     children: [
-      { path: '', component: EngineersListComponent },
-      { path: 'signin', component: SignInComponent },
+      { path: 'engineer-list', component: EngineersListComponent },
       { path: 'verify', component: VerifyRequestsComponent },
 
       { path: 'profile/:id', component: EngineerProfileComponent },

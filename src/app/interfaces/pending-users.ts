@@ -8,5 +8,8 @@ export interface PendingUsers {
   gender: string;
   profilePic: string;
   role: string;
+  createdAt: string;
+  updatedAt: string;
   __v: number;
+  docID: string;
 }

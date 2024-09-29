@@ -21,6 +21,7 @@ interface User {
   _id: string;
   fullName: string;
   email: string;
+  gender: string;
   role: string;
   profilePic: string;
 }

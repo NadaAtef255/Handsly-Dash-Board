@@ -1,72 +1,58 @@
-<div class="cards w-5/6 w ms-auto mt-24 p-6">
-    <p class="pb-12 text-xl font-semibold">Engineer List</p>
-    <div class="engineers flex gap-2">
-        @for (engineer of engineers; track engineer._id) {
-        <div class="relative flex w-80 flex-col rounded-xl bg-gray-50 bg-clip-border text-gray-700 shadow-md">
-            <div
-                class="relative mx-4 -mt-6 h-40 overflow-hidden rounded-xl bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40 bg-gradient-to-r from-blue-500 to-blue-600">
-                <img class="engineer-profile-pic" [src]="engineer.user.profilePic" alt="Engineer Profile Picture">
-            </div>
-            <div class="p-6">
-                <h5
-                    class="mb-2 block font-sans text-lg font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
-                    Engineer Name: <span>{{ engineer.user.fullName || 'N/A' }}</span>
-                </h5>
-                <h5
-                    class="mb-2 block font-sans text-lg font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
-                    Education: <span>{{ engineer.education.title || 'N/A' }}</span>
-                </h5>
-                <h5
-                    class="mb-2 block font-sans text-lg font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
-                    Skills: <span>{{ engineer.skills }}</span>
-                </h5>
-                <h5
-                    class="mb-2 block font-sans text-lg font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
-                    Verified: <span
-                        [ngClass]="engineer.verifiedStatus =='verified' ? 'bg-green-300 p-1' : 'bg-red-300 p-1'">
-                        {{ engineer.verifiedStatus =='verified' ? 'Yes' : 'No' }}
-                    </span>
-                </h5>
-            </div>
+<div class="cards w-5/6 w ms-auto mt-24 overflow-x-hidden p-6">
+  <p class="pb-12 text-xl font-semibold">Engineer List</p>
+  <div class="mb-5 text-center">
+    <input type="text" [(ngModel)]="searchTerm" (input)="filterEngineers()"
+      class="border border-gray-300 p-2 w-1/2 rounded-md" placeholder="Search by engineer name...">
+  </div>
+  <!-- Engineer List -->
+  <div class="engineers grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div *ngFor="let engineer of paginatedEngineers"
+      class="relative flex w-80 flex-col rounded-xl mt-9 bg-gray-50 bg-clip-border text-gray-700 shadow-md">
+      <!-- Engineer Card -->
 
-            <!-- <div class="p-6 pt-0">
-
-                <button [routerLink]="['profile',engineer.user._id]" data-ripple-light="true" type="button"
-                    class="select-none rounded-lg bg-blue-500 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
-
-  Engineers List
-  <div class="engineers grid grid-cols-1 md:grid-cols-3 gap-4 mt-10">
-    <div *ngFor="let engineer of filteredEngineers" class="relative flex flex-col rounded-xl bg-gray-50 bg-clip-border text-gray-700 shadow-md">
       <div
-          class="relative mx-4 -mt-6 h-40 overflow-hidden rounded-xl bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40 bg-gradient-to-r from-blue-500 to-blue-600">
-        <img class="engineer-profile-pic"
-             src="https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg"
-             alt="Engineer Profile Picture">
+        class="relative mx-4 -mt-6 h-40 overflow-hidden rounded-xl bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40 bg-gradient-to-r from-blue-500 to-blue-600">
+        <img class="engineer-profile-pic" [src]="engineer.user.profilePic" alt="Engineer Profile Picture">
       </div>
       <div class="p-6">
-        <h5 class="mb-2 block font-sans text-lg font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
-          Engineer Name: <span>{{ engineer.user.fullName || 'N/A' }}</span>
+        <h5
+          class="mb-2 block font-sans text-xl font-bold text-center leading-snug tracking-normal text-blue-gray-900 antialiased">
+          <span class="text-2xl font-medium">{{ engineer.user.fullName || 'N/A' }}</span>
         </h5>
-        <h5 class="mb-2 block font-sans text-lg font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
-          Education: <span>{{ engineer.education.title || 'N/A' }}</span>
+        <h5
+          class="mb-2 block font-sans text-lg font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
+          <span class="text-lg font-medium text-gray-600">{{ engineer.education.title || 'N/A' }}</span>
         </h5>
-        <h5 class="mb-2 block font-sans text-lg font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
-          Skills: <span>{{ engineer.skills }}</span>
+        <h5 class="mb-2  font-medium text-xl ">
+          Skills: <span class="text-gray-600 text-lg font-normal">{{ engineer.skills || "No Skills" }}</span>
         </h5>
-        <h5 class="mb-2 block font-sans text-lg font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
-          Verified: <span [ngClass]="engineer.verifiedStatus === 'verified' ? 'bg-green-300 p-1' : 'bg-red-300 p-1'">
-            {{ engineer.verifiedStatus === 'verified' ? 'Yes' : 'No' }}
-          </span>
+        <h5
+          class="mb-2 block font-sans text-lg font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
+          Education: <span class="text-gray-600 font-normal">{{ engineer.education.title}}</span>
+        </h5>
+
+        <h5
+          class="mb-2 block font-sans text-lg font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
+          Verified: <span
+            [ngClass]="engineer.verifiedStatus === 'verified' ? 'bg-green-300 rounded-md p-1' : 'bg-red-300 rounded-md p-1'">{{
+            engineer.verifiedStatus === 'accepted' ? 'Yes' : 'No' }}</span>
         </h5>
       </div>
-      <div class="p-6 pt-0">
-        <button [routerLink]="['profile', engineer._id]" data-ripple-light="true" type="button"
-                class="select-none rounded-lg bg-yellow-400 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-yellow-400/20 transition-all hover:shadow-lg hover:shadow-yellow-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
-          View Profile
-        </button>
-      </div>
+      <button [routerLink]="['/profile', engineer._id]"
+        class="select-none rounded-lg bg-amber-400 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md">
+        View Profile
+      </button>
     </div>
-  </div> -->
-        </div>
-        }
-    </div>
+  </div>
+
+  <!-- Pagination Controls -->
+  <div class="pagination mt-4 flex justify-center items-center">
+    <button (click)="prevPage()" [disabled]="currentPage === 1" class="px-4 py-2 bg-gray-300 rounded-l-lg">
+      Previous
+    </button>
+    <span class="px-4">{{ currentPage }} / {{ totalPages }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="px-4 py-2 bg-gray-300 rounded-r-lg">
+      Next
+    </button>
+  </div>
+</div>
