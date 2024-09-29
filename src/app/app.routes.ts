@@ -1,5 +1,3 @@
-
-
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PageNotFoundComponent } from './Pages/page-not-found/page-not-found.component';
@@ -16,25 +14,23 @@ import { ClientProfileComponent } from './Pages/client-profile/client-profile.co
 import { ServiceDetailsComponent } from './Pages/service-details/service-details.component';
 
 export const routes: Routes = [
+  { path: '', component: SignInComponent },
+
   {
     path: '',
     component: LayoutComponent,
     title: 'layout',
     children: [
-      { path: '', component: EngineersListComponent },
-      { path: 'signin', component: SignInComponent },
+      { path: 'engineer-list', component: EngineersListComponent },
       { path: 'verify', component: VerifyRequestsComponent },
 
       { path: 'profile/:id', component: EngineerProfileComponent },
-      { path: 'clients', component: ClientListComponent},
+      { path: 'clients', component: ClientListComponent },
       { path: 'clients/:id', component: ClientProfileComponent }, // Route for client profile
 
-      { path: 'services', component: ServiceListComponent},
+      { path: 'services', component: ServiceListComponent },
       { path: 'services/:id', component: ServiceDetailsComponent }, // Route for client profile
-      { path: 'proposal', component: ProposalsComponent},
-
-
-
+      { path: 'proposal', component: ProposalsComponent },
     ],
   },
   // { path: '', redirectTo: '/dashboard', pathMatch: 'full' },

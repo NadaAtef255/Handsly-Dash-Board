@@ -28,11 +28,13 @@ export class SignInComponent implements OnInit {
       (response) => {
         console.log(response);
         localStorage.setItem('token', JSON.stringify(response.token));
-        this.router.navigate(['']);
+        this.router.navigate(['/engineer-list']);
       },
       (error) => {
         console.log(error);
-        this.errorMsg = error.error.message || 'Unauthorized access. Please check your credentials.';
+        this.errorMsg =
+          error.error.message ||
+          'Unauthorized access. Please check your credentials.';
       }
     );
   }

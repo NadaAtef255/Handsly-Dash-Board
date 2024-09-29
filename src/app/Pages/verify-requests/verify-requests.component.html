@@ -1,12 +1,41 @@
 <div class="verify relative h-screen w-5/6 mt-16 p-6 ms-auto">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"> -->
+    <!-- <div class="filter-date flex gap-3">
+        <div class="text-center mt-20">
+            <label>Choose from</label> <br>
+            <input id="date" class="border-2 border-gray-300 rounded px-3 py-2 w-56" type="date"
+                placeholder="Select a date">
+        </div>
+        <div class="text-center mt-20">
+            <label>Choose to</label> <br>
+            <input id="date" class="border-2 border-gray-300 rounded px-3 py-2 w-56" type="date"
+                placeholder="Select a date">
+        </div>
+    </div> -->
+    <!-- <input [(ngModel)]="search" (change)="searchUsers()" type="search" placeholder="Search for user "
+        class="my-4 p-2 bg-gray-200 rounded-md border h-9 border-gray-500" name="" id=""> -->
+
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        flatpickr("#datepicker", {
+            // Configuration options for Flatpickr
+            // You can customize the appearance and behavior here
+        });
+    </script> -->
     <!-- Form visibility depends on selectedUser -->
+
+    <input [(ngModel)]="search" (ngModelChange)="searchUsers()" (keypress)="preventNumberInput($event)" type="search"
+        placeholder="Search for user"
+        class="my-4 p-2 bg-gray-50 shadow-sm shadow-amber-400 w-80 rounded-md border h-9 border-gray-500" />
+
     <div [class.hidden]="!selectedUser" class="view-form absolute flex justify-center inset-0 bg-black bg-opacity-25">
         <div
             class="form flex flex-col items-center fixed w-2/5 h-fit py-6 mt-8 rounded-lg bg-white shadow-md shadow-amber-300">
             <div class="close absolute top-3 right-5 cursor-pointer" (click)="closeForm()">X</div>
             <div class="profile-img flex justify-center pt-5 w-full">
-                <img class="rounded-full border-2 border-amber-400 w-40 h-40"
-                    [src]="selectedUser?.profilePic|| 'default-image-url.jpg'" alt="Profile Image">
+                <img class="rounded-full border-2 border-amber-400 w-40 h-40" [src]="selectedUser?.profilePic"
+                    alt="Profile Image">
             </div>
             <p class="text-lg font-medium mt-2">{{selectedUser?.fullName}}</p>
             <p class="text-gray-600">{{selectedUser?.role}}</p>
@@ -31,14 +60,18 @@
                     <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Name</th>
                     <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Email</th>
                     <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Role</th>
+                    <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Join date</th>
+
                     <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">View</th>
                 </tr>
             </thead>
             <tbody class="bg-white">
-                <tr *ngFor="let user of pendingUsers">
+                <tr *ngFor="let user of paginatedUsers">
                     <td class="py-4 px-6 border-b border-gray-200">{{user.fullName}}</td>
                     <td class="py-4 px-6 border-b border-gray-200">{{user.email}}</td>
                     <td class="py-4 px-6 border-b border-gray-200">{{user.role}}</td>
+                    <td class="py-4 px-6 border-b border-gray-200">{{ user.createdAt | date:'yyyy-MM-dd' }}</td>
+
                     <td class="py-4 px-6 border-b border-gray-200">
                         <button (click)="viewUser(user)"
                             class="bg-green-500 hover:bg-green-400 text-white py-2 px-3 rounded-xl text-xs">
@@ -48,5 +81,16 @@
                 </tr>
             </tbody>
         </table>
+    </div>
+
+    <!-- Pagination Controls -->
+    <div class="pagination mt-4 flex justify-center items-center">
+        <button (click)="prevPage()" [disabled]="currentPage === 1" class="px-4 py-2 bg-gray-300 rounded-l-lg">
+            Previous
+        </button>
+        <span class="px-4">{{ currentPage }} / {{ totalPages }}</span>
+        <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="px-4 py-2 bg-gray-300 rounded-r-lg">
+            Next
+        </button>
     </div>
 </div>

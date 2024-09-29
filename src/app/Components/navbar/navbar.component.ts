@@ -1,6 +1,6 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -9,6 +9,11 @@ import { RouterModule } from '@angular/router';
   styleUrl: './navbar.component.css',
 })
 export class NavbarComponent {
+  private readonly _Router = inject(Router);
+  logOut() {
+    localStorage.removeItem('token');
+    this._Router.navigate(['']);
+  }
   // dropdown nav & img
   isDropdownOpen = false;
 
