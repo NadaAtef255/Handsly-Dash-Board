@@ -31,10 +31,13 @@ export class VerifyRequestsComponent implements OnInit {
 
   viewUser(user: PendingUsers): void {
     this.selectedUser = user;
+    console.log(this.selectedUser.profilePic,"soraaaaaaaaaaaaaaaaaaaaaaaaa"); 
+
   }
 
   closeForm(): void {
     this.selectedUser = null;
+    
   }
 
   verifyUser(): void {
@@ -44,6 +47,7 @@ export class VerifyRequestsComponent implements OnInit {
           `http://localhost:8000/api/v1/verify/user/${this.selectedUser._id}`,
           { status: 'accepted' }
         )
+        
         .subscribe({
           next: () => {
             // Refresh the pending users list or update UI accordingly

@@ -4,15 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PageNotFoundComponent } from './Pages/page-not-found/page-not-found.component';
 import { LayoutComponent } from './Pages/layout/layout.component';
-<<<<<<< HEAD
-import { TestComponent } from './test/test.component';
-import { EngineersListComponent } from './Pages/engineer-list/engineer-list.component';
-import { Test2Component } from './test2/test2.component';
-=======
-// import { EngineersListComponent } from './Pages/Engineers_list/list-groups.component';
-// import { EngineerProfileComponent } from './Pages/Engineer-profile/engineer-profile.component';
 
->>>>>>> 94261a9681afb21815a4fa57884d66a1c8458a10
 import { EngineerProfileComponent } from './Pages/engineer-profile/engineer-profile.component';
 import { SignInComponent } from './Components/sign-in/sign-in.component';
 import { EngineersListComponent } from './Pages/engineer-list/engineer-list.component';

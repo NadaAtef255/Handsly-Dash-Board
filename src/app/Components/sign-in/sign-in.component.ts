@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { ISigninUser } from '../../Interfaces/ISignInUser';
+import { ISigninUser } from '../../interfaces/ISignInUser';
 
 @Component({
   selector: 'app-sign-in',
