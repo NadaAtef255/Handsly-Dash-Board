@@ -15,6 +15,7 @@ import { ServiceDetailsComponent } from './Pages/service-details/service-details
 import { LoginAlertComponent } from './Pages/login-alert/login-alert.component';
 import { loginGuard } from './gaurds/login.guard';
 import { preventLoginGuard } from './gaurds/prevent-login.guard';
+import { PaymentStatusComponent } from './payment-status/payment-status.component';
 
 export const routes: Routes = [
   { path: '', component: SignInComponent, canActivate: [preventLoginGuard] },
@@ -40,6 +41,8 @@ export const routes: Routes = [
       { path: 'services', component: ServiceListComponent },
       { path: 'services/:id', component: ServiceDetailsComponent }, // Route for client profile
       { path: 'proposal', component: ProposalsComponent },
+
+      { path: 'payment-status', component: PaymentStatusComponent }, // Route for PaymentStatus
     ],
   },
   // { path: '', redirectTo: '/dashboard', pathMatch: 'full' },

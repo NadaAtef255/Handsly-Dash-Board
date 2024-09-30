@@ -1,0 +1,370 @@
+<p>payment-status works!</p>
+<!-- with interface -->
+<!-- <div class="container mx-auto">
+  <div class="overflow-x-auto">
+    <table class="min-w-full border border-gray-200 mt-6 bg-white shadow-lg">
+      <thead class="bg-gray-100">
+        <tr>
+          <th class="text-left py-2 px-4 border-b border-gray-200 font-medium">
+            Engineer
+          </th>
+          <th class="text-left py-2 px-4 border-b border-gray-200 font-medium">
+            Client
+          </th>
+          <th class="text-left py-2 px-4 border-b border-gray-200 font-medium">
+            Service/Project
+          </th>
+          <th class="text-left py-2 px-4 border-b border-gray-200 font-medium">
+            Payment Status
+          </th>
+          <th class="text-left py-2 px-4 border-b border-gray-200 font-medium">
+            Total Payment
+          </th>
+          <th class="text-left py-2 px-4 border-b border-gray-200 font-medium">
+            Actions
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let payment of payments" class="bg-white hover:bg-gray-50">
+          <td class="text-left py-3 px-4 border-b border-gray-200">
+            {{ payment.engineer.fullName }} ({{ payment.engineer.email }})
+          </td>
+          <td class="text-left py-3 px-4 border-b border-gray-200">
+            {{ payment.client.fullName }} ({{ payment.client.email }})
+          </td>
+          <td class="text-left py-3 px-4 border-b border-gray-200">
+            {{ payment.projectTitle }}
+          </td>
+          <td class="text-left py-3 px-4 border-b border-gray-200">
+            <select
+              class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+              (change)="handleStatusChange($event, payment._id)"
+            >
+              <option selected>{{ payment.status }}</option>
+              <ng-container *ngFor="let status of paymentStatuses">
+                <option *ngIf="status !== payment.status">{{ status }}</option>
+              </ng-container>
+            </select>
+          </td>
+          <td
+            class="text-left py-3 px-4 border-b border-gray-200 font-semibold text-lg"
+          >
+            {{ payment.totalAmount | currency : "EGP" : "symbol" }}
+          </td>
+          <td class="text-left py-3 px-4 border-b border-gray-200">
+            <button
+              class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded mt-2"
+              (click)="approvePayment(payment._id)"
+            >
+              Approve
+            </button>
+            <button
+              class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded mt-2"
+              (click)="rejectPayment(payment._id)"
+            >
+              Reject
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <app-spinner *ngIf="isLoading"></app-spinner>
+  </div>
+</div> -->
+
+<!-- static data -->
+
+<div class="verify relative h-screen w-5/6 p-6 my-28 ms-auto">
+  <p class="text-3xl font-semibold my-16">Payment Status</p>
+  <div class="shadow-lg rounded-lg overflow-hidden mt-6">
+    <table class="min-w-full border border-gray-200 bg-white shadow-lg">
+      <thead class="bg-gray-100">
+        <tr>
+          <th
+            class="text-left py-2 px-4 border-b border-gray-200 text-gray-600 font-bold"
+          >
+            Engineer
+          </th>
+          <th
+            class="text-left py-2 px-4 border-b border-gray-200 text-gray-600 font-bold"
+          >
+            Client
+          </th>
+          <th
+            class="text-left py-2 px-4 border-b border-gray-200 text-gray-600 font-bold"
+          >
+            Service/Project
+          </th>
+          <!-- Payment Status -->
+          <th
+            class="text-left py-2 px-4 border-b border-gray-200 text-gray-600 font-bold"
+          >
+            Project Status
+          </th>
+          <th
+            class="text-left py-2 px-4 border-b border-gray-200 text-gray-600 font-bold"
+          >
+            Payment Amount
+          </th>
+          <th
+            class="text-left py-2 px-4 border-b border-gray-200 text-gray-600 font-bold"
+          >
+            Actions
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="bg-white hover:bg-gray-50">
+          <td class="text-left py-3 px-4 border-b border-gray-200">
+            John Doe (john.doe&#64;example.com)
+          </td>
+          <td class="text-left py-3 px-4 border-b border-gray-200">
+            Jane Smith (jane.smith&#64;example.com)
+          </td>
+          <td class="text-left py-3 px-4 border-b border-gray-200">
+            Web Development
+          </td>
+          <td class="text-left py-3 px-4 border-b border-gray-200">
+            <!-- <select
+              class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+            >
+              <option selected>Pending</option>
+              <option>Approved</option>
+              <option>Rejected</option>
+            </select> -->
+            <div
+              class="w-full px-3 py-2 text-center border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+            >
+              Pending
+            </div>
+          </td>
+          <td
+            class="text-left py-3 px-4 border-b border-gray-200 font-semibold text-lg"
+          >
+            5,000 EGP
+          </td>
+          <td class="text-left py-3 px-4 border-b border-gray-200">
+            <button
+              class="py-2 px-4 rounded-lg text-white hover:bg-green-500 bg-green-600 mt-2"
+            >
+              Approve
+            </button>
+            <button
+              class="py-2 px-4 mt-2 rounded-lg text-white hover:bg-red-500 bg-red-600"
+            >
+              Reject
+            </button>
+            <!-- <button
+              class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded mt-2"
+            >
+              Approve
+            </button> -->
+            <!-- <button
+              class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded mt-2"
+            >
+              Reject
+            </button> -->
+          </td>
+        </tr>
+
+        <tr class="bg-white hover:bg-gray-50">
+          <td class="text-left py-3 px-4 border-b border-gray-200">
+            Alice Johnson (alice.johnson&#64;example.com)
+          </td>
+          <td class="text-left py-3 px-4 border-b border-gray-200">
+            Bob Martin (bob.martin&#64;example.com)
+          </td>
+          <td class="text-left py-3 px-4 border-b border-gray-200">
+            Mobile App Development
+          </td>
+          <td class="text-left py-3 px-4 border-b border-gray-200">
+            <!-- <select
+              class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+            >
+              <option>Pending</option>
+              <option selected>Approved</option>
+              <option>Rejected</option>
+            </select> -->
+
+            <div
+              class="w-full px-3 py-2 text-center border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+            >
+              Completed
+            </div>
+          </td>
+          <td
+            class="text-left py-3 px-4 border-b border-gray-200 font-semibold text-lg"
+          >
+            7,500 EGP
+          </td>
+          <td class="text-left py-3 px-4 border-b border-gray-200">
+            <button
+              class="py-2 px-4 rounded-lg text-white hover:bg-green-500 bg-green-600 mt-2"
+            >
+              Approve
+            </button>
+            <button
+              class="py-2 px-4 mt-2 rounded-lg text-white hover:bg-red-500 bg-red-600"
+            >
+              Reject
+            </button>
+          </td>
+        </tr>
+
+        <tr class="bg-white hover:bg-gray-50">
+          <td class="text-left py-3 px-4 border-b border-gray-200">
+            Eve Davis (eve.davis&#64;example.com)
+          </td>
+          <td class="text-left py-3 px-4 border-b border-gray-200">
+            Chris Evans (chris.evans&#64;example.com)
+          </td>
+          <td class="text-left py-3 px-4 border-b border-gray-200">
+            API Integration
+          </td>
+          <td class="text-left py-3 px-4 border-b border-gray-200">
+            <!-- <select
+              class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+            >
+              <option>Pending</option>
+              <option>Approved</option>
+              <option selected>Rejected</option>
+            </select> -->
+            <div
+              class="w-full px-3 py-2 text-center border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+            >
+              Not Completed
+            </div>
+          </td>
+          <td
+            class="text-left py-3 px-4 border-b border-gray-200 font-semibold text-lg"
+          >
+            2,000 EGP
+          </td>
+          <td class="text-left py-3 px-4 border-b border-gray-200">
+            <button
+              class="py-2 px-4 rounded-lg text-white hover:bg-green-500 bg-green-600 mt-2"
+            >
+              Approve
+            </button>
+            <button
+              class="py-2 px-4 mt-2 rounded-lg text-white hover:bg-red-500 bg-red-600"
+            >
+              Reject
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- books -->
+<!-- <div class="container mx-auto mt-4">
+  <div class="verify relative h-screen w-5/6 p-6 ms-auto">
+    <div class="container mx-auto p-4">
+      <div class="overflow-x-auto">
+        <table class="table-auto border-collapse w-full bg-white text-left">
+          <thead>
+            <tr>
+              <th class="border-b-2 p-3">User</th>
+              <th class="border-b-2 p-3">Address</th>
+              <th class="border-b-2 p-3">Status</th>
+              <th class="border-b-2 p-3">Payment Method</th>
+              <th class="border-b-2 p-3">Items</th>
+              <th class="border-b-2 p-3">Total Price</th>
+              <th class="border-b-2 p-3">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+            <tr>
+              <td class="border-b p-3">
+                John Doe <br />
+                <span class="text-sm text-gray-600"
+                  >john.doe&#64;example.com</span
+                >
+              </td>
+              <td class="border-b p-3">123 Main St, Cairo, Egypt</td>
+              <td class="border-b p-3">
+                <select class="form-select w-full p-2 border rounded">
+                  <option value="Pending" selected>Pending</option>
+                  <option value="Shipped">Shipped</option>
+                  <option value="Delivered">Delivered</option>
+                  <option value="Cancelled">Cancelled</option>
+                </select>
+              </td>
+              <td class="border-b p-3">Credit Card</td>
+              <td class="border-b p-3">
+                <p>
+                  <span class="font-semibold">Book Title: </span>Angular for
+                  Beginners<br />
+                  <span class="font-semibold">Quantity: </span>1<br />
+                  <span class="font-semibold">Price: </span>200 ج.م
+                </p>
+                <hr class="my-2" />
+                <p>
+                  <span class="font-semibold">Book Title: </span>Advanced
+                  Angular<br />
+                  <span class="font-semibold">Quantity: </span>2<br />
+                  <span class="font-semibold">Price: </span>350 ج.م
+                </p>
+              </td>
+              <td class="border-b p-3 text-lg font-bold">900 ج.م</td>
+              <td class="border-b p-3">
+                <button
+                  class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+
+            
+            <tr>
+              <td class="border-b p-3">
+                Jane Smith <br />
+                <span class="text-sm text-gray-600"
+                  >jane.smith&#64;example.com</span
+                >
+              </td>
+              <td class="border-b p-3">456 Elm St, Alexandria, Egypt</td>
+              <td class="border-b p-3">
+                <select class="form-select w-full p-2 border rounded">
+                  <option value="Shipped" selected>Shipped</option>
+                  <option value="Pending">Pending</option>
+                  <option value="Delivered">Delivered</option>
+                  <option value="Cancelled">Cancelled</option>
+                </select>
+              </td>
+              <td class="border-b p-3">Cash on Delivery</td>
+              <td class="border-b p-3">
+                <p>
+                  <span class="font-semibold">Book Title: </span>React
+                  Essentials<br />
+                  <span class="font-semibold">Quantity: </span>1<br />
+                  <span class="font-semibold">Price: </span>250 ج.م
+                </p>
+                <hr class="my-2" />
+                <p>
+                  <span class="font-semibold">Book Title: </span>Node.js
+                  Mastery<br />
+                  <span class="font-semibold">Quantity: </span>1<br />
+                  <span class="font-semibold">Price: </span>300 ج.م
+                </p>
+              </td>
+              <td class="border-b p-3 text-lg font-bold">550 ج.م</td>
+              <td class="border-b p-3">
+                <button
+                  class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div> -->
