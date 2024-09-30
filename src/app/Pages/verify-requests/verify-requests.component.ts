@@ -13,28 +13,30 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./verify-requests.component.css'],
 })
 export class VerifyRequestsComponent implements OnInit {
-  search: string = ''; // Initialize search
+  search: string = '';
+  fromDate: string = ''; // Start date for filtering
+  toDate: string = ''; // End date for filtering
   private readonly _PendingVerificationService = inject(
     PendingVerificationService
   );
   private readonly _http = inject(HttpClient);
 
-  pendingUsers: PendingUsers[] = []; // Initialize as an empty array
-  filteredUsers: PendingUsers[] = []; // For storing filtered users
-  paginatedUsers: PendingUsers[] = []; // Users displayed on the current page
+  pendingUsers: PendingUsers[] = [];
+  filteredUsers: PendingUsers[] = [];
+  paginatedUsers: PendingUsers[] = [];
   selectedUser: PendingUsers | null = null;
 
-  currentPage: number = 1; // Current page
-  pageSize: number = 10; // Number of users per page
-  totalPages: number = 0; // Total number of pages
+  currentPage: number = 1;
+  pageSize: number = 10;
+  totalPages: number = 0;
 
   ngOnInit(): void {
     this._PendingVerificationService.getPandingVerification().subscribe({
       next: (response) => {
         console.log(response);
         this.pendingUsers = response.data.users;
-        this.filteredUsers = [...this.pendingUsers]; // Initialize filteredUsers
-        this.sortUsers('newest'); // Sort users from newest to oldest initially
+        this.filteredUsers = [...this.pendingUsers];
+        this.sortUsers('newest');
         this.totalPages = Math.ceil(this.filteredUsers.length / this.pageSize);
         this.updatePagination();
       },
@@ -44,15 +46,14 @@ export class VerifyRequestsComponent implements OnInit {
   // Sort users based on the selected order
   sortUsers(order: 'newest' | 'oldest'): void {
     this.filteredUsers.sort((a, b) => {
-      // Assuming `createdAt` is the date property of the user
       const dateA = new Date(a.createdAt).getTime();
       const dateB = new Date(b.createdAt).getTime();
 
-      return order === 'newest' ? dateB - dateA : dateA - dateB; // Sort based on selected order
+      return order === 'newest' ? dateB - dateA : dateA - dateB;
     });
-    this.currentPage = 1; // Reset to the first page after sorting
+    this.currentPage = 1;
     this.totalPages = Math.ceil(this.filteredUsers.length / this.pageSize);
-    this.updatePagination(); // Update pagination with sorted users
+    this.updatePagination();
   }
 
   // Update the paginatedUsers list for the current page
@@ -69,24 +70,55 @@ export class VerifyRequestsComponent implements OnInit {
       ? this.pendingUsers.filter((user) =>
           user.fullName.toLowerCase().includes(searchTrimmed.toLowerCase())
         )
-      : [...this.pendingUsers]; // Show all users if search is empty
+      : [...this.pendingUsers];
 
-    this.sortUsers('newest'); // Re-sort users after searching
-    this.currentPage = 1; // Reset to the first page when searching
+    this.sortUsers('newest');
+    this.currentPage = 1;
     this.totalPages = Math.ceil(this.filteredUsers.length / this.pageSize);
-    this.updatePagination(); // Update pagination with filtered users
+    this.updatePagination();
   }
 
   preventNumberInput(event: KeyboardEvent): void {
-    // Check if the key pressed is a number
     if (event.key >= '0' && event.key <= '9') {
-      event.preventDefault(); // Prevent the default action (input)
+      event.preventDefault();
     }
   }
 
-  // ... other methods (updatePagination, sortUsers, etc.)
+  // Date filter method
+  filterByDate(): void {
+    if (this.fromDate || this.toDate) {
+      this.filteredUsers = this.pendingUsers.filter((user) => {
+        const userDate = new Date(user.createdAt).getTime();
+        const from = this.fromDate ? new Date(this.fromDate).getTime() : null;
+        const to = this.toDate ? new Date(this.toDate).getTime() : null;
 
-  // Navigate to the previous page
+        return (!from || userDate >= from) && (!to || userDate <= to);
+      });
+    } else {
+      this.filteredUsers = [...this.pendingUsers];
+    }
+
+    this.sortUsers('newest');
+    this.currentPage = 1;
+    this.totalPages = Math.ceil(this.filteredUsers.length / this.pageSize);
+    this.updatePagination();
+  }
+
+  // Sort by role
+  sortByRole(order: 'clientToEngineer' | 'engineerToClient'): void {
+    this.filteredUsers.sort((a, b) => {
+      if (order === 'clientToEngineer') {
+        return a.role.localeCompare(b.role);
+      } else {
+        return b.role.localeCompare(a.role);
+      }
+    });
+
+    this.currentPage = 1;
+    this.totalPages = Math.ceil(this.filteredUsers.length / this.pageSize);
+    this.updatePagination();
+  }
+
   prevPage(): void {
     if (this.currentPage > 1) {
       this.currentPage--;
@@ -94,7 +126,6 @@ export class VerifyRequestsComponent implements OnInit {
     }
   }
 
-  // Navigate to the next page
   nextPage(): void {
     if (this.currentPage < this.totalPages) {
       this.currentPage++;
@@ -104,13 +135,11 @@ export class VerifyRequestsComponent implements OnInit {
 
   viewUser(user: PendingUsers): void {
     this.selectedUser = user;
-    console.log(this.selectedUser.profilePic,"soraaaaaaaaaaaaaaaaaaaaaaaaa"); 
-
+    console.log(this.selectedUser.profilePic, 'soraaaaaaaaaaaaaaaaaaaaaaaaa');
   }
 
   closeForm(): void {
     this.selectedUser = null;
-    
   }
 
   verifyUser(): void {
@@ -120,15 +149,13 @@ export class VerifyRequestsComponent implements OnInit {
           `http://localhost:8000/api/v1/verify/user/${this.selectedUser._id}`,
           { status: 'accepted' }
         )
-        
         .subscribe({
           next: () => {
-            // Remove the verified user and update the pagination
             this.pendingUsers = this.pendingUsers.filter(
               (user) => user._id !== this.selectedUser!._id
             );
-            this.filteredUsers = [...this.pendingUsers]; // Update filteredUsers
-            this.sortUsers('newest'); // Re-sort users after verification
+            this.filteredUsers = [...this.pendingUsers];
+            this.sortUsers('newest');
             this.totalPages = Math.ceil(
               this.filteredUsers.length / this.pageSize
             );
@@ -151,12 +178,11 @@ export class VerifyRequestsComponent implements OnInit {
         )
         .subscribe({
           next: () => {
-            // Remove the rejected user and update the pagination
             this.pendingUsers = this.pendingUsers.filter(
               (user) => user._id !== this.selectedUser!._id
             );
-            this.filteredUsers = [...this.pendingUsers]; // Update filteredUsers
-            this.sortUsers('newest'); // Re-sort users after rejection
+            this.filteredUsers = [...this.pendingUsers];
+            this.sortUsers('newest');
             this.totalPages = Math.ceil(
               this.filteredUsers.length / this.pageSize
             );

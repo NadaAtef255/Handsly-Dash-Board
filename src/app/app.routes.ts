@@ -12,14 +12,23 @@ import { ServiceListComponent } from './Pages/services/services.component';
 import { ProposalsComponent } from './Pages/proposals/proposals.component';
 import { ClientProfileComponent } from './Pages/client-profile/client-profile.component';
 import { ServiceDetailsComponent } from './Pages/service-details/service-details.component';
+import { LoginAlertComponent } from './Pages/login-alert/login-alert.component';
+import { loginGuard } from './gaurds/login.guard';
+import { preventLoginGuard } from './gaurds/prevent-login.guard';
 
 export const routes: Routes = [
-  { path: '', component: SignInComponent },
+  { path: '', component: SignInComponent, canActivate: [preventLoginGuard] },
+  {
+    path: 'login-alert',
+    component: LoginAlertComponent,
+    canActivate: [preventLoginGuard],
+  },
 
   {
     path: '',
     component: LayoutComponent,
     title: 'layout',
+    canActivate: [loginGuard],
     children: [
       { path: 'engineer-list', component: EngineersListComponent },
       { path: 'verify', component: VerifyRequestsComponent },

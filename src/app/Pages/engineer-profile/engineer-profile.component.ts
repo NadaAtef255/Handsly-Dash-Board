@@ -36,6 +36,14 @@ export class EngineerProfileComponent implements OnInit {
     gender: ['', [Validators.pattern(/^(male|female)$/)]],
     role: ['', [Validators.pattern(/^(engineer|client|admin)$/)]],
     overview: ['', [Validators.pattern(/^[a-zA-Z\s]+$/)]],
+    skills: [
+      '',
+      [
+        Validators.pattern(
+          /^[a-zA-Z]+[0-9]*([.]?[a-zA-Z0-9]+)*([,][a-zA-Z]+[0-9]*([.]?[a-zA-Z0-9]+)*)*$/
+        ),
+      ],
+    ],
   });
 
   ngOnInit(): void {
@@ -52,6 +60,7 @@ export class EngineerProfileComponent implements OnInit {
             gender: this.engineer.user.gender,
             role: this.engineer.user.role,
             overview: this.engineer.overview,
+            skills: this.engineer.skills,
           });
         },
       });
@@ -76,6 +85,7 @@ export class EngineerProfileComponent implements OnInit {
       gender: this.engineer.user.gender,
       role: this.engineer.user.role,
       overview: this.engineer.overview,
+      skills: this.engineer.skills,
     });
   }
 
@@ -110,6 +120,7 @@ export class EngineerProfileComponent implements OnInit {
               gender: this.engineer.user.gender,
               role: this.engineer.user.role,
               overview: this.engineer.overview,
+              skills: this.engineer.skills,
             });
           },
         });
